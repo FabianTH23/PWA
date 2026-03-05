@@ -1,0 +1,92 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilo general */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    text-align: center;
+    padding: 40px;
+}
+
+/* Título principal */
+h1 {
+    font-size: 40px;
+    color: #4CAF30;
+    margin-bottom: 20px;
+}
+
+/* Texto */
+p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+/* Contenedor */
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* Tarjeta */
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    margin: 20px auto;
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.1);
+}
+
+/* Botón */
+button {
+    padding: 12px 25px;
+    border: none;
+    background-color: #4CAF30;
+    color: white;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #3e8e41;
+}
+
+/* Navbar simple */
+.navbar {
+    width: 100%;
+    background: white;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Logo */
+.nav-logo {
+    width: 80px;
+    border-radius: 50%;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+
+    h1 {
+        font-size: 28px;
+    }
+
+    p {
+        font-size: 16px;
+    }
+
+    body {
+        padding: 20px;
+    }
+
+}

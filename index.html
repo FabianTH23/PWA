@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Erick Fabian Terrazas Hernández | CV</title>
+
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.json?v=3">
+  <meta name="theme-color" content="#4CAF30">
+
+  <!-- Iconos -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/icono-32x32.png">
+  <link rel="apple-touch-icon" href="/images/icono-192x192.png">
+
+  <!-- iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+
+<body>
+
+  <header class="navbar">
+    <div class="nav-left">
+      <!-- Si quieres, cambia imagen.jpeg por una foto tuya -->
+      <img src="images/imagen.jpeg" class="nav-logo" alt="Foto/Logo" />
+    </div>
+
+    <div class="nav-center">
+      <h1>Erick Fabian Terrazas Hernández</h1>
+      <h2>Estudiante de Tecnologías de la Información</h2>
+    </div>
+
+    <div class="nav-right">
+      <button class="btn btn-light" onclick="scrollA('contacto')">Contacto</button>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- RESUMEN -->
+    <section class="card" id="resumen">
+      <h3>Resumen profesional</h3>
+      <p>
+        Estudiante de T.I con gran interés en aprender. Capacidad para adaptarme a todo tipo de entornos y aportar
+        siempre lo mejor de mí. Me caracteriza la facilidad para el trabajo en equipo y el entusiasmo por aprender y
+        desarrollar habilidades. Busco una oportunidad laboral para adquirir más experiencia.
+      </p>
+    </section>
+
+    <!-- CONTACTO RAPIDO -->
+    <section class="card" id="contacto">
+      <h3>Contacto</h3>
+      <p><b>Dirección:</b> Kennedy 202, Chihuahua 31064, Chihuahua Villa Juarez</p>
+      <p><b>Teléfono:</b> <a href="tel:+526144637385">614 463 7385</a></p>
+      <p><b>Email:</b> <a href="mailto:Fallu-12@hotmail.com">Fallu-12@hotmail.com</a></p>
+    </section>
+
+    <!-- FORMACION -->
+    <section class="card" id="formacion">
+      <h3>Formación</h3>
+
+      <div class="card" style="margin-top:14px;">
+        <h4>Universidad Tecnológica de Chihuahua</h4>
+        <p><b>Técnico en desarrollo de software multiplataforma</b> — Tecnologías de la información y comunicación</p>
+        <p>01/2022 – Actualidad</p>
+      </div>
+
+      <div class="card" style="margin-top:14px;">
+        <h4>Colegio Preuniversitario de Chihuahua A.C. (UACH)</h4>
+        <p><b>Preparatoria</b></p>
+        <p>01/2017 – 01/2019</p>
+      </div>
+    </section>
+
+    <!-- EXPERIENCIA -->
+    <section class="card" id="experiencia">
+      <h3>Historial laboral</h3>
+
+      <div class="card" style="margin-top:14px;">
+        <h4>Chofer — Digriapan</h4>
+        <p><b>02/2021 – 02/2022</b> | Chihuahua City, Chihuahua</p>
+        <ul style="text-align:left; margin-top:10px; padding-left:20px;">
+          <li>Repartidor de rutas locales y foráneas.</li>
+          <li>Uso responsable y cuidadoso del vehículo y accesorios.</li>
+          <li>Transporte de paquetes, mercancías o productos en tiempo y forma.</li>
+        </ul>
+      </div>
+
+      <div class="card" style="margin-top:14px;">
+        <h4>Montacarguista — Ramsa</h4>
+        <p><b>03/2018 – 01/2020</b> | Chihuahua City, Chihuahua</p>
+        <ul style="text-align:left; margin-top:10px; padding-left:20px;">
+          <li>Encargado de surtir material y acomodar mercancía.</li>
+          <li>Responsable de la mercancía y conteo cíclico.</li>
+          <li>Cumplimiento de funciones siguiendo especificaciones con precisión.</li>
+          <li>Apoyo en tareas administrativas y comerciales.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- APTITUDES -->
+    <section class="card" id="aptitudes">
+      <h3>Aptitudes</h3>
+      <div class="chips" style="margin-top:12px;">
+        <span class="chip">Amabilidad y educación</span>
+        <span class="chip">Responsabilidad y compromiso</span>
+        <span class="chip">Puntualidad</span>
+        <span class="chip">Comunicación efectiva</span>
+        <span class="chip">Trabajo en equipo</span>
+      </div>
+    </section>
+
+    <!-- CERTIFICACIONES -->
+    <section class="card" id="certificaciones">
+      <h3>Certificaciones</h3>
+      <p>Certificación de Coursera de Google en soporte de Tecnologías de la Información.</p>
+    </section>
+
+    <!-- CTA -->
+    <section class="card">
+      <h3>Objetivo</h3>
+      <p>
+        En busca de una oportunidad laboral en la que pueda adquirir más experiencia y continuar desarrollando mis habilidades.
+      </p>
+
+      <div style="margin-top:14px;">
+        <button onclick="window.print()">Imprimir / Guardar PDF</button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-row">
+      <p>© 2026 Erick Fabian Terrazas Hernández</p>
+      <div class="footer-links">
+        <a href="#resumen">Resumen</a>
+        <a href="#formacion">Formación</a>
+        <a href="#experiencia">Experiencia</a>
+        <a href="#contacto">Contacto</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/script.js"></script>
+</body>
+</html>
