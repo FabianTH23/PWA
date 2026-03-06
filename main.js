@@ -1,48 +1,14 @@
-// Mensaje cuando la página termina de cargar
-document.addEventListener("DOMContentLoaded", function () {
-
-    console.log("Aplicación PWA cargada correctamente");
-
-    mostrarMensajeBienvenida();
-
-});
-
-
-// Función de bienvenida
-function mostrarMensajeBienvenida() {
-
-    const mensaje = "Bienvenido a la PWA de Fabian Terrazas";
-
-    console.log(mensaje);
-
+// Registrar Service Worker
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(() => console.log('✅ Service Worker registrado'))
+      .catch(err => console.log('❌ Error SW:', err));
+  });
 }
 
-
-// Función para mostrar información de la aplicación
-function mostrarInfoApp() {
-
-    alert("Esta es una Aplicación Web Progresiva (PWA) creada para la práctica de Manifest.json.");
-
+// Scroll suave
+function scrollA(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth' });
 }
-
-
-// Ejemplo de botón dinámico
-function crearBoton() {
-
-    const boton = document.createElement("button");
-
-    boton.textContent = "Mostrar información de la app";
-
-    boton.onclick = mostrarInfoApp;
-
-    document.body.appendChild(boton);
-
-}
-
-
-// Crear botón automáticamente al cargar la página
-window.onload = function () {
-
-    crearBoton();
-
-};
