@@ -1,88 +1,85 @@
-// Asignar nombre y version de cache
-const CACHE_NAME = 'v5_cache_mi_pwa';
+const CACHE_NAME = 'v1_cache_mi_pwa';
 
-// Archivos a cachear
-const urlsToCache = [
-  '/',
+const urlsTuCache = [
+  './',
   './index.html',
-  './manifest.json',
   './styles.css',
+  './script.js',
   './main.js',
 
-  // ICONOS
-  '/images/icono-16x16.png',
-  '/images/icono-32x32.png',
-  '/images/icono-64x64.png',
-  '/images/icono-96x96.png',
-  '/images/icono-128x128.png',
-  '/images/icono-144x144.png',
-  '/images/icono-192x192.png',
-  '/images/icono-240x240.png',
-  '/images/icono-256x256.png',
-  '/images/icono-384x384.png',
-  '/images/icono-512x512.png',
-  '/images/icono-1024x1024.png'
+  // OJO: deja SOLO los íconos que realmente existen en tu carpeta /images
+  './images/icono-16x16.png',
+  './images/icono-32x32.png',
+  './images/icono-64x64.png',
+  './images/icono-96x96.png',
+  './images/icono-128x128.png',
+  './images/icono-144x144.png',
+  './images/icono-152x152.png',
+  './images/icono-192x192.png',
+  './images/icono-384x384.png',
+  './images/icono-512x512.png'
 ];
 
 // INSTALL
 self.addEventListener('install', (e) => {
   e.waitUntil(
-    caches.open(CACHE_NAME)
-      .then((cache) => cache.addAll(urlsToCache))
-      .then(() => self.skipWaiting())
-      .catch((err) => console.log('No se ha registrado el cache', err))
-  );
-});
-
-// ACTIVATE
-self.addEventListener('activate', (e) => {
-  const cacheWhitelist = [CACHE_NAME];
-
-  e.waitUntil(
-    caches.keys().then((cacheNames) => {
-      return Promise.all(
-        cacheNames.map((cacheName) => {
-          if (!cacheWhitelist.includes(cacheName)) {
-            return caches.delete(cacheName);
-          }
-        })
+    caches.open(CACHE_NAME).then(async (cache) => {
+      // En vez de addAll (que truena si uno falla), agregamos uno por uno
+      const results = await Promise.all(
+        urlsTuCache.map((url) =>
+          cache.add(url).catch((err) => {
+            console.log('No se pudo cachear:', url, err);
+            return null;
+          })
+        )
       );
-    }).then(() => self.clients.claim())
+
+      self.skipWaiting();
+      return results;
+    }).catch((err) => {
+      console.log('No se ha registrado el cache', err);
+    })
   );
 });
 
-// FETCH (Offline seguro)
+// ACTIVATE (limpia caches viejas)
+self.addEventListener('activate', (e) => {
+  e.waitUntil(
+    caches.keys().then((keys) =>
+      Promise.all(
+        keys.map((key) => (key !== CACHE_NAME ? caches.delete(key) : null))
+      )
+    )
+  );
+  self.clients.claim();
+});
+
+// FETCH (siempre devuelve Response)
 self.addEventListener('fetch', (e) => {
-
-  // Navegación (cargar páginas)
-  if (e.request.mode === 'navigate') {
-    e.respondWith(
-      fetch(e.request).catch(() => caches.match('/index.html'))
-    );
-    return;
-  }
-
-  // Archivos (css/js/img): cache first
   e.respondWith(
-    caches.match(e.request)
-      .then((response) => {
-        if (response) return response;
+    caches.match(e.request).then((cached) => {
+      if (cached) return cached;
 
-        // Si no está en cache, intenta red
-        return fetch(e.request).then((networkResponse) => {
-          // Guardar en cache lo que se descargue
-          return caches.open(CACHE_NAME).then((cache) => {
-            cache.put(e.request, networkResponse.clone());
-            return networkResponse;
+      return fetch(e.request)
+        .then((response) => {
+          // Guardar en cache solo GET y solo si es mismo origen (opcional)
+          if (e.request.method === 'GET' && response && response.ok) {
+            const copy = response.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(e.request, copy));
+          }
+          return response;
+        })
+        .catch(() => {
+          // Fallback: si es navegación, regresamos index.html cacheado
+          if (e.request.mode === 'navigate') {
+            return caches.match('./index.html');
+          }
+          // Para otros recursos, regresamos un Response válido
+          return new Response('Offline', {
+            status: 503,
+            headers: { 'Content-Type': 'text/plain' }
           });
         });
-      })
-      .catch(() => {
-        // fallback final: siempre un Response válido
-        return new Response('Sin conexión y recurso no disponible en caché.', {
-          status: 200,
-          headers: { 'Content-Type': 'text/plain; charset=utf-8' }
-        });
-      })
+    })
   );
 });
